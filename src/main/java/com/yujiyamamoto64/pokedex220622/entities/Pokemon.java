@@ -17,7 +17,12 @@ public class Pokemon implements Serializable{
 	private String name;
 	
 	public Pokemon() {
-		
+	}
+	
+	public Pokemon(Long id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
 	}
 
 	public Long getId() {
@@ -65,5 +70,4 @@ public class Pokemon implements Serializable{
 	public String toString() {
 		return "Pokemon [id=" + id + ", name=" + name + "]";
 	}
-	
 }
