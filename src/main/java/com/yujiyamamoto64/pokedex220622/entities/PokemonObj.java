@@ -25,7 +25,11 @@ public class PokemonObj implements Serializable{
 	
 	@JsonIgnore
 	@ManyToMany(mappedBy = "next_evolution")
-	private List<Pokemon> pokemons = new ArrayList<>();
+	private List<Pokemon> pokemonsnext = new ArrayList<>();
+	
+	@JsonIgnore
+	@ManyToMany(mappedBy = "pre_evolution")
+	private List<Pokemon> pokemonspre = new ArrayList<>();
 	
 	public PokemonObj() {
 	}

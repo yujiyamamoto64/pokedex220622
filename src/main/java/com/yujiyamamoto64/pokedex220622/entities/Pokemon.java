@@ -33,10 +33,16 @@ public class Pokemon implements Serializable{
 	private Set<PokemonType> types = new HashSet<>();
 	
 	@ManyToMany
-	@JoinTable(name = "tb_pokemon_pokemonobj",
+	@JoinTable(name = "tb_pokemon_pokemonobj1",
 	joinColumns = @JoinColumn(name = "pokemon_id"),
 	inverseJoinColumns = @JoinColumn(name = "pokemonobj_id"))
 	private List<PokemonObj> next_evolution = new ArrayList<>();
+	
+	@ManyToMany
+	@JoinTable(name = "tb_pokemon_pokemonobj2",
+	joinColumns = @JoinColumn(name = "pokemon_id"),
+	inverseJoinColumns = @JoinColumn(name = "pokemonobj_id"))
+	private List<PokemonObj> pre_evolution = new ArrayList<>();
 	
 	public Pokemon() {
 	}
@@ -73,6 +79,10 @@ public class Pokemon implements Serializable{
 	
 	public List<PokemonObj> getNext_evolution() {
 		return next_evolution;
+	}
+	
+	public List<PokemonObj> getPre_evolution() {
+		return pre_evolution;
 	}
 
 	@Override

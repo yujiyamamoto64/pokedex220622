@@ -37,12 +37,14 @@ public class TestConfig implements CommandLineRunner{
 		PokemonType type1 = new PokemonType(null, "Grass");
 		PokemonType type2 = new PokemonType(null, "Poison");
 		
+		pokemonRepository.saveAll(Arrays.asList(pokemon1, pokemon2, pokemon3));
+		pokemonTypeRepository.saveAll(Arrays.asList(type1, type2));
+		
+		PokemonObj pokemonobj1 = new PokemonObj(pokemon1);
 		PokemonObj pokemonobj2 = new PokemonObj(pokemon2);
 		PokemonObj pokemonobj3 = new PokemonObj(pokemon3);
 		
-		pokemonRepository.saveAll(Arrays.asList(pokemon1, pokemon2, pokemon3));
-		pokemonTypeRepository.saveAll(Arrays.asList(type1, type2));
-		pokemonObjRepository.saveAll(Arrays.asList(pokemonobj2, pokemonobj3));
+		pokemonObjRepository.saveAll(Arrays.asList(pokemonobj1, pokemonobj2, pokemonobj3));
 		
 		pokemon1.getTypes().add(type1);
 		pokemon1.getTypes().add(type2);
@@ -56,11 +58,14 @@ public class TestConfig implements CommandLineRunner{
 		pokemon1.getNext_evolution().add(pokemonobj2);
 		pokemon1.getNext_evolution().add(pokemonobj3);
 		
+		pokemon2.getPre_evolution().add(pokemonobj1);
 		pokemon2.getNext_evolution().add(pokemonobj3);
+		
+		pokemon3.getPre_evolution().add(pokemonobj1);
+		pokemon3.getPre_evolution().add(pokemonobj2);
 		
 		pokemonRepository.saveAll(Arrays.asList(pokemon1, pokemon2, pokemon3));
 		
 	}
-	
 	
 }
