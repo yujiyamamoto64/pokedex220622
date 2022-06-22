@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_pokemontype")
 public class PokemonType implements Serializable{
@@ -22,6 +24,7 @@ public class PokemonType implements Serializable{
 	private String name;
 	
 	@ManyToMany(mappedBy = "types")
+	@JsonIgnore
 	private Set<Pokemon> pokemons = new HashSet<>();
 	
 	public PokemonType() {
