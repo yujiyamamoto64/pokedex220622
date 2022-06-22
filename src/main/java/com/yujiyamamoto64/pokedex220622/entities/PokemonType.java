@@ -8,14 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_pokemon")
-public class Pokemon implements Serializable{
+@Table(name = "tb_pokemontype")
+public class PokemonType implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -23,16 +21,13 @@ public class Pokemon implements Serializable{
 	private Long id;
 	private String name;
 	
-	@ManyToMany
-	@JoinTable(name = "tb_pokemon_pokemontype",
-	joinColumns = @JoinColumn(name = "pokemon_id"),
-	inverseJoinColumns = @JoinColumn(name = "pokemontype_id"))
-	private Set<PokemonType> types = new HashSet<>();
+	@ManyToMany(mappedBy = "types")
+	private Set<Pokemon> pokemons = new HashSet<>();
 	
-	public Pokemon() {
+	public PokemonType() {
 	}
 	
-	public Pokemon(Long id, String name) {
+	public PokemonType(Long id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -54,8 +49,8 @@ public class Pokemon implements Serializable{
 		this.name = name;
 	}
 	
-	public Set<PokemonType> getTypes() {
-		return types;
+	public Set<Pokemon> getPokemons() {
+		return pokemons;
 	}
 
 	@Override
@@ -74,18 +69,13 @@ public class Pokemon implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Pokemon other = (Pokemon) obj;
+		PokemonType other = (PokemonType) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Pokemon [id=" + id + ", name=" + name + "]";
 	}
 
 }
