@@ -23,8 +23,8 @@ public class PokemonType implements Serializable{
 	private Long id;
 	private String name;
 	
-	@ManyToMany(mappedBy = "types")
 	@JsonIgnore
+	@ManyToMany(mappedBy = "types")
 	private Set<Pokemon> pokemons = new HashSet<>();
 	
 	public PokemonType() {

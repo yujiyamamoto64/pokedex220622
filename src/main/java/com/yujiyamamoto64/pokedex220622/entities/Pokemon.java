@@ -1,7 +1,9 @@
 package com.yujiyamamoto64.pokedex220622.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -23,13 +25,24 @@ public class Pokemon implements Serializable{
 	private Long id;
 	private String name;
 	
+	
 	@ManyToMany
 	@JoinTable(name = "tb_pokemon_pokemontype",
 	joinColumns = @JoinColumn(name = "pokemon_id"),
 	inverseJoinColumns = @JoinColumn(name = "pokemontype_id"))
 	private Set<PokemonType> types = new HashSet<>();
 	
+	@ManyToMany
+	@JoinTable(name = "tb_pokemon_pokemonobj",
+	joinColumns = @JoinColumn(name = "pokemon_id"),
+	inverseJoinColumns = @JoinColumn(name = "pokemonobj_id"))
+	private List<PokemonObj> next_evolution = new ArrayList<>();
+	
 	public Pokemon() {
+	}
+	
+	public Pokemon (String name) {
+		this.name = name;
 	}
 	
 	public Pokemon(Long id, String name) {
@@ -56,6 +69,10 @@ public class Pokemon implements Serializable{
 	
 	public Set<PokemonType> getTypes() {
 		return types;
+	}
+	
+	public List<PokemonObj> getNext_evolution() {
+		return next_evolution;
 	}
 
 	@Override
